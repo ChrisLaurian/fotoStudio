@@ -1,15 +1,21 @@
 <template>
     <div>
       <h1>About Page</h1>
+      <ImagenesCarousel />
       <!-- Your page content here -->
     </div>
   </template>
   
   <script>
+  import ImagenesCarousel from '../components/ImagenesCarousel';
+
 export default {
-  name: 'PaginaInicio', // Cambia 'Inicio' a 'PaginaInicio' o cualquier otro nombre multi-palabra
-  // Resto del código del componente
+  name: 'PaginaInicio', 
+  componets: {
+    ImagenesCarousel,
+  },
 }
+
 </script>
 
   
@@ -18,5 +24,6 @@ export default {
   h1 {
     color: #333;
   }
+
   
   </style>
