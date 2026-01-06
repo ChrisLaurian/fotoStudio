@@ -1,13 +1,19 @@
 <template>
   <div>
     <div class="Fondo">
-      <h1>Lorem ipsum</h1>
+      
+      <BarraDeBusqueda />
     </div>
 
     <div class="section">
-      <h2>Example</h2>
+      <h2>Momentos</h2>
       <div class="Line"></div>
-      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident earum exercitationem adipisci enim hic totam deserunt labore qui iste doloribus ab corrupti, beatae distinctio quos, eius quis eum reiciendis quibusdam.</p>
+      
+      <p class="Parrafo">"Creemos que la fotografía es el único botón de pausa que tiene la vida. 
+        No se trata solo de capturar una imagen, sino de atrapar la emoción de un instante irrepetible: 
+        una mirada cómplice, una risa espontánea o la luz perfecta de un atardecer. 
+        Nuestro objetivo es transformar esos segundos efímeros en recuerdos que perduren para siempre, 
+        contando tu historia sin necesidad de palabras."</p>
     </div>
 
     <div class="Galeria"></div>
@@ -16,8 +22,13 @@
 </template>
 
 <script>
+import BarraDeBusqueda from '../components/BarraDeBusqueda.vue';
+
 export default {
   name: 'PaginaInicio',
+  components: { BarraDeBusqueda,
+
+  }
 };
 </script>
 
@@ -60,4 +71,8 @@ h1 {
   margin: 0 auto;
 }
 
+.Parrafo{
+  width: 70%;
+  height: auto;
+}
 </style>
