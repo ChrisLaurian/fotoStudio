@@ -26,17 +26,25 @@ nav {
   justify-content: space-between; /* Alineación entre el logotipo y los enlaces */
   align-items: center; /* Alinear verticalmente el contenido */
   height: 7em;
+  width: 100%;
+}
+
+.logo{
+  display: flex;
+  order: 1;
+  height: auto;
+  width: auto;
 }
 
 ul {
+  order: 5;
   list-style: none;
   display: flex;
   padding: 0;
+  flex-direction: row;
+  
 }
 
-li {
-  margin: 0 10px;
-}
 
 a {
   font-size: large;

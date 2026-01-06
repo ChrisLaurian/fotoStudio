@@ -1,8 +1,19 @@
 <template>
-    <div>
-      <h1>About Page</h1>
-      <!-- Your page content here -->
-    </div>
+    <section class="hero-short">
+        <h1>Nosotros</h1>
+    </section>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Nuestra Historia</h2>
+            <hr class="divider">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Provident earum exercitationem 
+                adipisci enim hic totam deserunt labore qui iste doloribus ab corrupti, beatae distinctio 
+                quos, eius quis eum reiciendis quibusdam.
+            </p>
+        </section>
+    </main>
   </template>
   
   <script>
