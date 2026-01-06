@@ -7,7 +7,7 @@
 
 <script>
 import Navbar from './components/Navbar.vue';
-import Footer from './views/Fooder.vue';
+import Footer from './components/Fooder.vue';
 
 export default {
   name: 'App',
