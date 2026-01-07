@@ -19,6 +19,13 @@ const routes = [
     name: 'contacto',
     component: Contacto
   },
+
+  {
+    // El :id? permite que la URL sea /formulario o /formulario/2
+    path: '/formulario/:id?', 
+    name: 'ComponentFormulario', // <--- Este es el nombre que busca el push
+    component: () => import('../components/ComponentFormulario.vue')
+  }
 ]
 
 const router = createRouter({

@@ -3,13 +3,17 @@
       <h1>About Page</h1>
       <!-- Your page content here -->
     </div>
+    <ComponentFormulario />
   </template>
   
   <script>
+  import ComponentFormulario from '../components/ComponentFormulario.vue';
+
+
   export default {
-    name: 'PaginaContacto', // Cambia 'Inicio' a 'PaginaInicio' o cualquier otro nombre multi-palabra
-    // Resto del código del componente
-  }
+    name: 'PaginaContacto',
+    components: { ComponentFormulario }
+}
   </script>
   
   <style scoped>
