@@ -1,13 +1,11 @@
 <template>
-  <section class="hero-short">
-    <h1>Nosotros</h1>
-  </section>
+
 
   <main class="container">
 
     <section class="intro">
       <h2>Nuestros Servicios de Estudio</h2>
-      <hr class="divider">
+      
       
       <p v-if="productos.length === 0">Cargando servicios desde el catálogo...</p>
 
@@ -117,41 +115,58 @@ export default {
 </script>
 
 <style scoped>
+
+.intro{
+  margin-top: 1em;
+}
 .servicios-grid {
-  display: grid;
+  display: flex;
+  flex-direction: row;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   margin-top: 30px;
 }
 .servicio-card {
+  display: flex;
+  justify-content: center;
   padding: 1.5rem;
   background: #f9f9f9;
   border-radius: 8px;
   border-left: 5px solid #ff6600; /* Color naranja de tu estudio */
+  margin-bottom: 2em;
 }
+
+.servicio-card img {
+  width: 10em;
+  height: 25em;
+}
+
+.servicio-card h3{
+  margin-top: 5px;
+}
+
+.servicio-card p {
+  margin-top: 5px;
+}
+
 .precio {
   font-weight: bold;
   color: #333;
 }
 
 .btn-editar {
+  align-self: center;
     background-color: #ffc107;
     color: black;
     border: none;
     padding: 5px 10px;
+    margin: 1em;
     border-radius: 4px;
     cursor: pointer;
 }
 
-.btn-update {
-    background-color: #28a745; /* Verde para actualizar */
-    color: white;
-}
-
-.btn-cancel {
-    background-color: #dc3545; /* Rojo para cancelar */
-    color: white;
-    margin-left: 10px;
+.btn-editar:hover{
+    background-color: #ecd17d;
 }
 
 .btn-borrar {
@@ -161,7 +176,7 @@ export default {
     padding: 8px 12px;
     border-radius: 4px;
     cursor: pointer;
-    margin-left: 10px;
+    
     transition: background 0.3s;
 }
 

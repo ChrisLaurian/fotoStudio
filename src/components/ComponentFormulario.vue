@@ -9,16 +9,17 @@
       
       <input v-model="nuevoProducto.precio" type="text" placeholder="Precio (ej: 1500)">
 
-      <label>Imagen del servicio:</label>
-<input type="file" @change="alSeleccionarArchivo">
-
-<p v-if="nuevoProducto.imagen">Imagen actual: {{ nuevoProducto.imagen }}</p>
       
+        <input id="Subirimg" type="file" @change="alSeleccionarArchivo" accept="image/*">
+
+        <p v-if="nuevoProducto.imagen">Imagen actual: {{ limitarCaracteres(nuevoProducto.imagen, 25) }}
+        <img class="Prev" :src="'http://192.168.100.5/FotoEstudio-Backend/uploads/' + nuevoProducto.imagen" width="50"></p>
+
       <button type="submit">
         {{ editando ? 'Actualizar en Base de Datos' : 'Guardar en Base de Datos' }}
       </button>
 
-      <button v-if="editando" type="button" @click="$router.push('/nosotros')" style="background: gray; margin-top: 5px;">
+      <button v-if="editando" type="button" @click="$router.push('/acerca')"  style="background: gray; margin-top: 5px;">
         Cancelar
       </button>
     </form>
@@ -32,18 +33,19 @@ export default {
   name: 'ComponentFormulario',
   data() {
     return {
-      editando: false, // Faltaba esto
-      idEnEdicion: null, // Faltaba esto
+      editando: false,
+      idEnEdicion: null,
+      archivoSeleccionado: null,
+      imagenPreview: null,
       nuevoProducto: {
         nombre: '',
-        descripcion: '', // Corregido de "description" a "descripcion"
+        descripcion: '',
         precio: '',
         imagen: 'default.jpg'
       }
     }
   },
   async mounted() {
-    // Revisamos si la URL trae un ID (ej: /formulario/2)
     const id = this.$route.params.id;
     if (id) {
       this.editando = true;
@@ -51,10 +53,9 @@ export default {
       await this.cargarProductoParaEditar(id);
     }
   },
-  methods: {
+  methods: { // <--- Inician los métodos
     async cargarProductoParaEditar(id) {
       try {
-        // Usamos el servicio (él es quien tiene la API_URL, por eso aquí no falla)
         const res = await ProductoService.getProducto(id); 
         if (res.status === 'success') {
           this.nuevoProducto = res.data;
@@ -64,42 +65,53 @@ export default {
       }
     },
 
-    // 1. Capturamos el archivo cuando el usuario lo elige
+    limitarCaracteres(texto, limite) {
+      if (!texto) return '';
+      if (texto.length > limite) {
+        return texto.substring(0, limite) + "...";
+      }
+      return texto;
+    },
+
     alSeleccionarArchivo(event) {
-        this.archivoSeleccionado = event.target.files[0];
+      const file = event.target.files[0];
+      if (file) {
+        this.archivoSeleccionado = file;
+        console.log("Archivo capturado:", file.name);
+        this.imagenPreview = URL.createObjectURL(file);
+      }
     },
 
     async enviarFormulario() {
-        try {
-            // 2. Si hay una foto nueva seleccionada, la subimos PRIMERO
-            if (this.archivoSeleccionado) {
-                const resImagen = await ProductoService.subirImagen(this.archivoSeleccionado);
-                if (resImagen.status === 'success') {
-                    // Guardamos el nombre del archivo que nos dio el servidor
-                    this.nuevoProducto.imagen = resImagen.filename;
-                }
-            }
-
-            // 3. Luego guardamos/actualizamos el producto con el nombre de la imagen ya listo
-            if (this.editando) {
-                await ProductoService.actualizarProducto(this.idEnEdicion, this.nuevoProducto);
-            } else {
-                await ProductoService.guardarProducto(this.nuevoProducto);
-            }
-            
-            this.$router.push('/nosotros');
-        } catch (error) {
-            alert("Error en el proceso");
+      try {
+        if (this.archivoSeleccionado) {
+          console.log("Subiendo imagen...");
+          const resImagen = await ProductoService.subirImagen(this.archivoSeleccionado);
+          if (resImagen.status === 'success') {
+            this.nuevoProducto.imagen = resImagen.filename;
+          }
         }
-    }
-    
 
-},
+        if (this.editando) {
+          await ProductoService.actualizarProducto(this.idEnEdicion, this.nuevoProducto);
+        } else {
+          await ProductoService.guardarProducto(this.nuevoProducto);
+        }
+
+        this.$router.push('/acerca');
+      } catch (error) {
+        console.error("Error completo:", error);
+        alert("Algo falló al guardar");
+      }
+    }
+  } // <--- AQUÍ deben cerrar los métodos
 }
 </script>
 
 <style scoped>
-/* Tu CSS está perfecto, no hace falta cambiarlo */
+.admin-section p{
+    color: white;
+}
 .formulario {
   display: flex;
   flex-direction: column;
@@ -114,7 +126,13 @@ export default {
   padding: 10px;
   border-radius: 5px;
   border: none;
+  
 }
+
+#Subirimg {
+ color: white;
+}
+
 .formulario button {
   background: #ff6600;
   color: white;
@@ -124,5 +142,9 @@ export default {
   padding: 10px;
 }
 
+.Prev{
+    border-radius: 10px;
+    
+}
 
 </style>

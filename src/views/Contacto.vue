@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h1>About Page</h1>
+      
       <!-- Your page content here -->
     </div>
     <ComponentFormulario />
