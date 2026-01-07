@@ -5,8 +5,8 @@
     </div>
     <ul>
       <li><router-link to="/">Inicio</router-link></li>
-      <li><router-link to="/acerca">Acerca de</router-link></li>
-      <li><router-link to="/contacto">Contacto</router-link></li>
+      <li><router-link to="/acerca">Servicios</router-link></li>
+      <li><router-link to="/contacto">Nuevo Servicio</router-link></li>
     </ul>
   </nav>
   </template>
