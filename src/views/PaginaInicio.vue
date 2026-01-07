@@ -16,21 +16,24 @@
         contando tu historia sin necesidad de palabras."</p>
     </div>
 
+    <Carousel :images="misFotos" :interval="5000"/>
+
     <div class="Galeria"></div>
 
   </div>
 </template>
 
-<script>
+<script setup>
 import BarraDeBusqueda from '../components/BarraDeBusqueda.vue';
+import Carousel from '../components/ComponentCarousel.vue'
 
-export default {
-  name: 'PaginaInicio',
-  components: { BarraDeBusqueda,
-
-  }
-};
+const misFotos = [
+  'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1000&q=80',
+  'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1000&q=80',
+  'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=1000&q=80'
+]; 
 </script>
+
 
 <style scoped>
 /* Your component-specific styles here */

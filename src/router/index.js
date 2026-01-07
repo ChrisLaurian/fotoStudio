@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Incio from '../views/Inicio.vue'
+import Incio from '../views/PaginaInicio.vue'
 import Acerca from '../views/Acerca.vue'
 import Contacto from '../views/Contacto.vue'
 
